@@ -69,7 +69,7 @@ else if(requiredQueryNames !== true) {
           // catch  error if there's no parms
           return err
         })
-       // ensure if the file not already exist
+       // ensure if the file  already exist
         if (fileSys.existsSync(OutputSourceFolder)) { 
           return res.sendFile(`${OutputSourceFolder}`)
         }
