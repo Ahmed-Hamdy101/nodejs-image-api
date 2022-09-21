@@ -45,10 +45,11 @@ else if(Fname == '') {
   // we can also add this condition fname.length > 1  it's vaild if there's at least one char
   return res.status(400).send(errors.err2)
   } 
-else if( height && width == NaN|| 0 ) {
-    // we can also add this condition fname.length > 1  it's vaild if there's at least one char
+  // valid the height and width
+  else if( height && width == NaN|| 0 ) {
     return res.status(400).send(errors.warr)
   } 
+  //ensure ifis the name match
 else if(requiredQueryNames !== true) {
     return res.status(400).send(errors.err3)
   }
@@ -68,13 +69,15 @@ else if(requiredQueryNames !== true) {
           // catch  error if there's no parms
           return err
         })
-      
+       // ensure if the file not already exist
         if (fileSys.existsSync(OutputSourceFolder)) { 
           return res.sendFile(`${OutputSourceFolder}`)
         }
+      // resize the image using function
         resize(PathImg,width,height,OutputSourceFolder);  
 
       }
+   // return the image path
       return res.sendFile(`${OutputSourceFolder}`);
     })
 
