@@ -7,6 +7,6 @@
 -  **Run** ` npm install `
 -  **Run** ` npm run start `
   #### Resources
--  ##### [Sharp](https://sharp.pixelplumbing.com/)
+-  ##### [Sharp]([https://sharp.pixelplumbing.com/](https://sharp.pixelplumbing.com/api-resize))
 -  ##### [fs-extra](https://www.npmjs.com/package/fs-extra/)
--  ##### [Node js](https://nodejs.org/api/readline.html#readline_readline)
+-  ##### [Node js](https://nodejs.org/api/fs.html#fsexistssyncpath)
