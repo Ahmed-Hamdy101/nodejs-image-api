@@ -14,7 +14,7 @@
  #### endpoint1:
  |              endpoint1                   |         Description              |
  |                 ---                      |            ---                   |
- | size/?filename=fjord&width=y6&height=600| set filename and width and height|
+ | size/?filename=fjord&width=200&height=600| set filename and width and height|
  #### response:
  ```json
  {
@@ -30,7 +30,7 @@
  |                                         |                                  |
  size/?filename=fjord123&width=200&height=600|   invalid name check from name    |
  |                                       |                                 |
- |size/?filename=fjord&width=200&height=a    |invalid inputs for height and width|
+ |size/?filename=fjord&width=y6&height=a    |invalid inputs for height and width|
  
  #### response:
  ```json
