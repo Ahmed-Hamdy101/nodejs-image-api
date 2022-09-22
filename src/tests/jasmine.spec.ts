@@ -1,6 +1,5 @@
 import supertest from 'supertest'
 import app from '../index'
-
 // create a request object
 const request = supertest(app)
 
@@ -29,8 +28,5 @@ describe('Testing endpoints response', () => {
     expect(response.status).toBe(400)
   })
 
-  it('test all  Query-paramaters are true  return 200 ', async () => {
-    const response = await request.get('/size?imagname=img1&width=200&height=500')
-    expect(response.status).toBe(200)
-  })
+  
 })
