@@ -10,7 +10,7 @@
 -  ##### [Sharp](https://sharp.pixelplumbing.com/api-resize)
 -  ##### [fs-extra](https://www.npmjs.com/package/fs-extra/)
 -  ##### [Node js -> filexistSysnc](https://nodejs.org/api/fs.html#fsexistssyncpath)
--  ##### [Node js -> process.cwd]([https://nodejs.org/api/fs.html#fsexistssyncpath](https://nodejs.org/api/process.html#processcwd))
+-  ##### [Node js -> process.cwd](https://nodejs.org/api/process.html#processcwd)
  #### endpoint1:
  |              endpoint2                   |         Description              |
  |                 ---                      |            ---                   |
