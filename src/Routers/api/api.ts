@@ -6,57 +6,56 @@ import path from 'path'
 import fileSys from 'fs-extra'
 //Import names from file /util
 import names from '../util/util'
-import resize  from '../app/sharp'
+import imageprocessing  from '../app/sharp'
 // create instance of that class Application  and make new express object
 const app: Application = express()
 
 // Create index  Router
 app.get('/', (req: Request, res: Response) => {
   //---------------------------- making query string------------------------------------------
-  const Fname = req.query.imagname as string,
+  const Fname = req.query.filename as string,
     w = req.query.width as string,
     h = req.query.height as string
   //--------------------------------end Queries------------------------------------------------
 
   //----------------------{{ Passing thec Query-pic/path (pic/folder)/coverison ti num of picture }}----------------------------
-  const PathImg = path.resolve('./' + `img/${Fname}.jpg`)
+  const PathImg = path.join( process.cwd(),`img/${Fname}.jpg`)
   const requiredQueryNames = names.includes(Fname) as boolean // we can make new function that accepted heystack,needdle to find what are we looking inside array
   // converting height and width
   const width: number = parseInt(w),
   height: number = parseInt(h) 
   const pathToFolder = './img/resized',
-  OutputSourceFolder:string = path.resolve('./'+`/img/resized/${Fname}+${width + height}.jpg`) // 1: giving path for creating folder  and 2: then give the path of imag that we will resize it
+  OutputSourceFolder:string = path.join(process.cwd(),`img/resized/${Fname}_${width}_${height}.jpg`) // 1: giving path for creating folder  and 2: then give the path of imag that we will resize it
 
   //------------------------------------------------------{{ end passing }}------------------------------------------------
 
   //-------------------------{{ Objects with errors , Handling errors With if/Switch Case }}-------------------------------
   const errors: { err1: string; err2: string; err3: string; warr: string } = {
     err1: ` <h5 style='  padding: 20px;background-color: #f44336;color: white;margin-bottom: 15px; text-align:center'> Bad request  404  Error in  ! Queries-string : are  not defined! </h5> `,
-    err2: ` <h5 style=' padding: 20px;background-color: #f44336;color: white;margin-bottom: 15px; text-align:center '>Sorry ! Query-Name  is empty ! </h5> `,
+    err2: ` <h5 style=' padding: 20px;background-color: #f44336;color: white;margin-bottom: 15px; text-align:center '>Sorry ! filename and  height and width at least to be  10   length    ! </h5> `,
     err3: ` <h5 style=' padding: 20px;background-color: #f44336;color: white;margin-bottom: 15px; text-align:center '> this ${Fname} does not match  please provide the name as  well  ! </h5> `,
-    warr: ` <h5 style=' padding: 20px;background-color: yellow;color: white;margin-bottom: 15px; text-align:center '>    Query-width:${w} and Query-height:${h} is not defiend! </h5> `
+    warr: ` <h5 style=' padding: 20px;background-color: yellow;color: white;margin-bottom: 15px; text-align:center '>    error Query-width:${w} and Query-height:${h} is  not number  please check fro inputs as number</h5> `
   }
   // check if the query-name is not define
 if (Fname == undefined) {
     return res.status(400).send(errors.err1)
   }
   // check if the Query-name is empty
-else if(Fname == '') {
+ if((Fname&&h&&w).length==0) {
   // we can also add this condition fname.length > 1  it's vaild if there's at least one char
   return res.status(400).send(errors.err2)
   } 
-  // valid the height and width
-  else if( height && width == NaN|| 0 ) {
+  // valid hight and width
+ if( isNaN(height && width) ) {
+
     return res.status(400).send(errors.warr)
   } 
-  //ensure ifis the name match
-else if(requiredQueryNames !== true) {
+ if(requiredQueryNames != true) {
     return res.status(400).send(errors.err3)
   }
   //-----------------------------------------------{ { End Handling errors With if/Switch Case } }-----------------------------------------------
 
   //----------------------------------------{ { if there's no error found Check from the width/height/name  } }-------------------------------
-  else {
 
   // create a folder inside image Dir with Promise
       fileSys
@@ -69,17 +68,24 @@ else if(requiredQueryNames !== true) {
           // catch  error if there's no parms
           return err
         })
-       // ensure if the file  already exist
-        if (fileSys.existsSync(OutputSourceFolder)) { 
-          return res.sendFile(`${OutputSourceFolder}`)
-        }
-      // resize the image using function
-        resize(PathImg,width,height,OutputSourceFolder);  
 
-      }
-   // return the image path
-      return res.sendFile(`${OutputSourceFolder}`);
-    })
+        if (fileSys.existsSync(OutputSourceFolder)) { 
+           return res.sendFile(OutputSourceFolder)
+          } 
+
+          imageprocessing(PathImg,width,height,OutputSourceFolder);   
+ 
+          return  setTimeout(() => {
+            try {
+              fileSys.accessSync(OutputSourceFolder);
+              res.status(200).sendFile(OutputSourceFolder);  
+            } catch (err) {
+              return err;
+            }
+          }, 10000);
+
+      });
 
 export default app
+
 
