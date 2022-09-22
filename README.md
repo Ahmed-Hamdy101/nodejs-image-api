@@ -14,7 +14,7 @@
  #### endpoint1:
  |              endpoint1                   |         Description              |
  |                 ---                      |            ---                   |
- | size/?filename=fjord&width=200&height=600| set filename and width and height|
+ | size/?filename=fjord&width=y6&height=600| set filename and width and height|
  #### response:
  ```json
  {
