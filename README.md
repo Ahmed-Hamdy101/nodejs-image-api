@@ -12,7 +12,7 @@
 -  ##### [Node js -> filexistSysnc](https://nodejs.org/api/fs.html#fsexistssyncpath)
 -  ##### [Node js -> process.cwd](https://nodejs.org/api/process.html#processcwd)
  #### endpoint1:
- |              endpoint2                   |         Description              |
+ |              endpoint1                   |         Description              |
  |                 ---                      |            ---                   |
  | size/?filename=fjord&width=200&height=600| set filename and width and height|
  #### response:
@@ -24,7 +24,7 @@
  ```
  
   #### endpoint2:
- |              endpoin3                     |         Description               |
+ |              endpoin2                     |         Description               |
  |                 ---                      |            ---                     |
  |       size/?filename= &width= &height=""  | missing query-paramaters-value    |
  |                                         |                                  |
