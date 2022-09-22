@@ -25,11 +25,11 @@
  
   #### endpoint2:
  |              endpoin3                     |         Description               |
- |                                           |                                   |
+ |                 ---                      |            ---                     |
  |       size/?filename= &width= &height=""  | missing query-paramaters-value    |
- |                                           |                                   |
+ |                 ---                      |            ---                     |
  size/?filename=fjord123&width=200&height=600|   invalid name check from name    |
- |                                           |                                   |
+ |                 ---                      |            ---                     |
  |size/?filename=fjord&width=200&height=a    |invalid inputs for height and width|
  
  #### response:
